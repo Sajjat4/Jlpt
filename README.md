@@ -1,16 +1,32 @@
-# AI Assistant Universe
+# JLPT Scanner & Number Quiz
 
-A responsive static website that showcases what an AI assistant can do across web creation, coding help, research, summarization, creative writing, API guidance, and automation planning.
+A mobile-first static web app for scanning study material with browser OCR and practicing JLPT-style appendix number readings/kanji. The interface is inspired by iOS: light surfaces, rounded cards, soft shadows, large touch-friendly controls, and responsive layouts for phones first.
 
-## Project overview
+## Main features
 
-This project is a full-page cosmic themed landing site with a Bengali/English hero, animated particles, glowing gradient blobs, feature cards, a configurable scoring system, and practical API/access guidance. It is intentionally dependency-free so it can be opened directly in a browser or served by any static web server.
+- **OCR / Scanner**
+  - Open the device camera, capture a frame, or upload an image.
+  - Run OCR in the browser with Tesseract.js from the CDN.
+  - Choose Japanese, English, Bengali, or Japanese + English recognition.
+  - View scanned text, copy it, save it locally, or download it as a `.txt` file.
+
+- **JLPT Appendix Number quiz**
+  - Enter how many questions to generate, from 1 to 50.
+  - Questions are generated from a Japanese number bank with kanji and accepted kana/romaji readings.
+  - Each question includes answer input, Check, Voice, and Answer buttons.
+  - Correct answers show a green tick state; wrong answers show a red cross state and reveal the accepted answer.
+  - Scoreboard tracks score percentage, total questions, correct answers, wrong answers, and answered questions.
+
+- **UI / UX**
+  - iPhone/iOS-inspired minimalist visual design.
+  - Rounded glass cards, soft shadows, big controls, and sticky quiz summary.
+  - Mobile-first responsive layout with light theme and automatic dark mode support.
 
 ## How to open or run
 
 ### Option 1: Open directly
 
-Open `index.html` in your browser.
+Open `index.html` in a modern browser. Camera access generally requires HTTPS or `localhost`, so local serving is recommended for the scanner camera feature.
 
 ### Option 2: Serve locally
 
@@ -26,23 +42,25 @@ Then visit:
 http://localhost:8000
 ```
 
-## Main features
-
-- Dark cosmic gradient theme with animated glowing blobs and canvas particles.
-- Fixed responsive navigation with smooth scrolling and active section highlighting.
-- Mobile hamburger menu for smaller screens.
-- Feature filtering for build, knowledge, and creative capabilities.
-- Configurable capability scoring in `script.js` via an array of `{ label, score }` values.
-- Score progress bars that animate when the scoring section scrolls into view.
-- API/access section explaining backend access patterns, API key requirements, authentication, and usage limits.
-- Responsive cards and content sections that stack cleanly on mobile.
-
 ## File structure
 
 ```text
 /workspace/Jlpt
-├── index.html   # Page structure and content sections
-├── styles.css   # Cosmic theme, responsive layout, animations
-├── script.js    # Navigation, particles, filters, score rendering
-└── README.md    # Project documentation
+├── index.html                  # Page structure and app mount points
+├── styles.css                  # iOS-inspired responsive theme
+├── script.js                   # App bootstrap and smooth scrolling
+├── src
+│   ├── components
+│   │   ├── quiz.js             # Quiz UI, validation interactions, score rendering
+│   │   └── scanner.js          # Camera/upload OCR UI, copy/save/download actions
+│   ├── data
+│   │   └── jlptNumbers.js      # Japanese number question bank
+│   └── utils
+│       └── quiz.js             # Quiz generation, validation, and summary helpers
+└── README.md                   # Project documentation
 ```
+
+## Notes
+
+- OCR depends on the public Tesseract.js CDN and browser support for WebAssembly/Workers.
+- Camera capture uses `navigator.mediaDevices.getUserMedia`, which is available only in secure browser contexts such as HTTPS or `localhost`.

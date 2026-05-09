@@ -3,190 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AI Assistant Universe showcases assistant capabilities, API access paths, scoring, and use cases." />
-  <title>AI Assistant Universe | এআই সহকারী মহাবিশ্ব</title>
+  <meta name="description" content="JLPT Scanner is a mobile-first OCR scanner and Japanese number quiz app for JLPT practice." />
+  <title>JLPT Scanner & Number Quiz</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@500;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script type="module" src="script.js"></script>
 </head>
 <body>
-  <div class="cosmic-bg" aria-hidden="true">
-    <span class="blob blob-one"></span>
-    <span class="blob blob-two"></span>
-    <span class="blob blob-three"></span>
-    <canvas id="particleCanvas"></canvas>
-  </div>
-
-  <header class="site-header" id="home">
-    <nav class="navbar" aria-label="Primary navigation">
-      <a class="brand" href="#home" aria-label="AI Assistant Universe home">
-        <span class="brand-orb"></span>
-        <span>AI Assistant Universe</span>
+  <header class="app-header" id="home">
+    <nav class="top-nav" aria-label="Primary navigation">
+      <a class="brand" href="#home" aria-label="JLPT Scanner home">
+        <span class="brand-mark">日</span>
+        <span>JLPT Scanner</span>
       </a>
-      <button class="menu-toggle" aria-expanded="false" aria-controls="navMenu">
-        <span class="sr-only">Toggle navigation menu</span>
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-menu" id="navMenu">
-        <li><a class="nav-link active" href="#home">Home</a></li>
-        <li><a class="nav-link" href="#features">Features</a></li>
-        <li><a class="nav-link" href="#scoring">Scoring System</a></li>
-        <li><a class="nav-link" href="#api">API / Access</a></li>
-        <li><a class="nav-link" href="#use-cases">Use Cases</a></li>
-        <li><a class="nav-link" href="#contact">Contact / Start</a></li>
-      </ul>
+      <div class="nav-actions">
+        <a href="#scanner">Scanner</a>
+        <a href="#quiz">Quiz</a>
+      </div>
     </nav>
 
-    <section class="hero section-shell">
-      <div class="hero-content reveal">
-        <p class="eyebrow">এআই সহকারী মহাবিশ্ব • Build, analyze, automate</p>
-        <h1>AI Assistant Universe</h1>
-        <p class="hero-copy">
-          A universal showcase for what an assistant can do: create websites, write and debug code,
-          research deeply, summarize documents, guide API integrations, and plan reliable automations.
+    <section class="hero shell">
+      <div class="hero-copy">
+        <p class="eyebrow">OCR • JLPT Number Practice • iOS-style</p>
+        <h1>Scan Japanese text and practice JLPT appendix numbers.</h1>
+        <p>
+          A clean mobile-first study companion with camera/upload OCR, saved scan notes,
+          generated number questions, instant answer checking, and a focused score summary.
         </p>
         <div class="hero-actions">
-          <a class="btn primary" href="#features">Explore Features</a>
-          <a class="btn secondary" href="#api">API Access</a>
+          <a class="button primary" href="#scanner">Start scanning</a>
+          <a class="button secondary" href="#quiz">Take a quiz</a>
         </div>
       </div>
-      <aside class="hero-panel reveal" aria-label="Assistant capability snapshot">
-        <div class="panel-glow"></div>
-        <p class="panel-kicker">Live Capability Matrix</p>
-        <div class="orbit-card">
-          <span>Web</span><span>Code</span><span>Research</span><span>API</span>
-        </div>
-        <p class="panel-text">One assistant, multiple workflows—ready for teams, builders, creators, and learners.</p>
+      <aside class="phone-preview" aria-label="App feature preview">
+        <div class="phone-notch"></div>
+        <div class="preview-card active"><span>📷</span><strong>OCR Scanner</strong><small>Camera or upload</small></div>
+        <div class="preview-card"><span>🔢</span><strong>Number Quiz</strong><small>Correct / wrong states</small></div>
+        <div class="preview-score"><span>Score</span><strong>0 / 0</strong></div>
       </aside>
     </section>
   </header>
 
   <main>
-    <section class="section-shell" id="features">
-      <div class="section-heading reveal">
-        <p class="eyebrow">Feature Galaxy</p>
-        <h2>Capabilities built for real work</h2>
-        <p>Filter the cards or explore the complete assistant toolkit below.</p>
+    <section class="shell section-stack" id="scanner" aria-labelledby="scanner-title">
+      <div class="section-heading">
+        <p class="eyebrow">Scanner</p>
+        <h2 id="scanner-title">OCR from camera or image upload</h2>
+        <p>Choose Japanese, English, or Bengali recognition and save the extracted text for later practice.</p>
       </div>
-      <div class="filter-row reveal" aria-label="Feature filters">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="build">Build</button>
-        <button class="filter-btn" data-filter="knowledge">Knowledge</button>
-        <button class="filter-btn" data-filter="creative">Creative</button>
-      </div>
-      <div class="card-grid" id="featureGrid">
-        <article class="feature-card reveal" data-category="build">
-          <span class="card-icon">🌐</span>
-          <h3>Website creation</h3>
-          <p>Design responsive landing pages, dashboards, portfolios, and static app experiences.</p>
-        </article>
-        <article class="feature-card reveal" data-category="build">
-          <span class="card-icon">💻</span>
-          <h3>Coding help</h3>
-          <p>Generate code, explain bugs, refactor components, write tests, and improve architecture.</p>
-        </article>
-        <article class="feature-card reveal" data-category="knowledge">
-          <span class="card-icon">🔎</span>
-          <h3>Research & analysis</h3>
-          <p>Compare sources, synthesize insights, outline decisions, and turn data into clear findings.</p>
-        </article>
-        <article class="feature-card reveal" data-category="knowledge">
-          <span class="card-icon">📄</span>
-          <h3>Document summarization</h3>
-          <p>Condense reports, PDFs, notes, and long-form content into action-ready summaries.</p>
-        </article>
-        <article class="feature-card reveal" data-category="creative">
-          <span class="card-icon">✨</span>
-          <h3>Creative writing</h3>
-          <p>Draft stories, scripts, campaigns, product copy, social posts, and polished emails.</p>
-        </article>
-        <article class="feature-card reveal" data-category="build">
-          <span class="card-icon">🔌</span>
-          <h3>API integration guidance</h3>
-          <p>Plan authentication, endpoints, backend flows, rate limits, and safe key management.</p>
-        </article>
-        <article class="feature-card reveal" data-category="build">
-          <span class="card-icon">⚙️</span>
-          <h3>Automation planning</h3>
-          <p>Map repeatable workflows, triggers, data handoffs, and human review checkpoints.</p>
-        </article>
-      </div>
+      <div id="scannerApp"></div>
     </section>
 
-    <section class="section-shell split-section" id="scoring">
-      <div class="section-heading reveal">
-        <p class="eyebrow">Scoring System</p>
-        <h2>Configurable performance meters</h2>
-        <p>Scores are loaded from <code>script.js</code>, making the dashboard easy to update.</p>
+    <section class="shell section-stack" id="quiz" aria-labelledby="quiz-title">
+      <div class="section-heading">
+        <p class="eyebrow">JLPT Appendix Number Test</p>
+        <h2 id="quiz-title">Generate exactly the number of questions you want</h2>
+        <p>Type the Japanese reading or kanji answer, then check instantly with green ticks and red crosses.</p>
       </div>
-      <div class="score-grid reveal" id="scoreGrid" aria-live="polite"></div>
-    </section>
-
-    <section class="section-shell api-section" id="api">
-      <div class="api-card reveal">
-        <p class="eyebrow">API / Access</p>
-        <h2>Can API access be created?</h2>
-        <p>
-          Yes. A production assistant experience can connect to an API through a secure backend server.
-          The frontend should never expose private API keys directly in browser code.
-        </p>
-        <div class="access-grid">
-          <div>
-            <h3>Access methods</h3>
-            <ul>
-              <li>Backend REST endpoint for chat or task automation</li>
-              <li>Serverless function for lightweight integrations</li>
-              <li>Internal admin dashboard with role-based access</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Requirements</h3>
-            <ul>
-              <li>API key stored in environment variables</li>
-              <li>Authentication, logging, and usage limits</li>
-              <li>Input validation and safe response handling</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Example use cases</h3>
-            <ul>
-              <li>Customer support copilot</li>
-              <li>Code review helper</li>
-              <li>Research summary pipeline</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-shell" id="use-cases">
-      <div class="section-heading reveal">
-        <p class="eyebrow">Use Cases</p>
-        <h2>Where the assistant shines</h2>
-      </div>
-      <div class="timeline">
-        <article class="timeline-item reveal"><strong>Startups</strong><span>Prototype product pages, APIs, and launch content faster.</span></article>
-        <article class="timeline-item reveal"><strong>Students</strong><span>Explain complex topics, summarize notes, and practice writing.</span></article>
-        <article class="timeline-item reveal"><strong>Teams</strong><span>Automate reporting, research competitors, and document decisions.</span></article>
-        <article class="timeline-item reveal"><strong>Creators</strong><span>Brainstorm scripts, design campaigns, and polish publishing workflows.</span></article>
-      </div>
-    </section>
-
-    <section class="section-shell contact-section" id="contact">
-      <div class="contact-card reveal">
-        <p class="eyebrow">Contact / Start</p>
-        <h2>Ready to build your assistant workflow?</h2>
-        <p>Choose a goal, define data sources, decide access rules, and connect the assistant safely.</p>
-        <a class="btn primary" href="mailto:hello@example.com?subject=AI%20Assistant%20Universe%20Demo">Start a Conversation</a>
-      </div>
+      <div id="quizApp"></div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>© 2026 AI Assistant Universe. Designed as a responsive static showcase.</p>
+  <footer class="footer shell">
+    <p>Built for fast mobile study sessions. OCR runs in the browser with Tesseract.js.</p>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
