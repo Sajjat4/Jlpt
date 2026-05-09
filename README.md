@@ -1,25 +1,27 @@
 # AI Assistant Universe
 
-A responsive static website and Android APK wrapper that showcases what an AI assistant can do across web creation, coding help, research, summarization, creative writing, API guidance, and automation planning.
+AI Assistant Universe is a responsive static showcase website with an Android APK wrapper. It presents what an AI assistant can do across website creation, coding help, research, document summarization, creative writing, API integration guidance, and automation planning.
+
+> Conflict resolution note: this README keeps the static website documentation and the Android APK build documentation together in one clean version, with no merge-conflict markers.
 
 ## Project overview
 
-This project includes two delivery targets:
+This repository has two delivery targets that share the same web content:
 
-1. **Static website**: a full-page cosmic themed landing site with a Bengali/English hero, animated particles, glowing gradient blobs, feature cards, configurable scoring, and API/access guidance.
-2. **Android APK version**: a native Android WebView app that packages the same website into an installable APK. The website files at the repository root remain the source of truth and are copied into Android assets at build time.
+1. **Static website** — `index.html`, `styles.css`, and `script.js` provide a full-page cosmic themed landing site with a Bengali/English hero, animated particles, glowing gradient blobs, feature cards, configurable scoring, API/access guidance, and responsive navigation.
+2. **Android APK version** — the `app/` module wraps the same website in a native Android WebView app. The root website files remain the source of truth and are copied into Android assets at build time.
 
-The web version is dependency-free and can be opened directly in a browser or served by any static web server. The Android version uses Gradle and the Android Gradle Plugin.
+The website can run without frontend dependencies. The APK build uses Gradle, the Android Gradle Plugin, and a local Android SDK installation.
 
-## How to open or run the website
+## Open or run the website
 
 ### Option 1: Open directly
 
-Open `index.html` in your browser.
+Open `index.html` in any modern browser.
 
 ### Option 2: Serve locally
 
-From the project directory, run:
+From the repository root, run:
 
 ```bash
 python3 -m http.server 8000
@@ -31,27 +33,27 @@ Then visit:
 http://localhost:8000
 ```
 
-## How to build the APK
+## Build the Android APK
 
-Install the Android SDK, then set `ANDROID_HOME` or create `local.properties` with your SDK path:
+Install the Android SDK, then either set `ANDROID_HOME` or create a `local.properties` file in the repository root:
 
 ```properties
 sdk.dir=/path/to/Android/Sdk
 ```
 
-Build a debug APK from the repository root:
+Build a debug APK:
 
 ```bash
 gradle assembleDebug
 ```
 
-The generated APK will be available at:
+The generated debug APK will be available at:
 
 ```text
 app/build/outputs/apk/debug/app-debug.apk
 ```
 
-For a release APK, configure signing credentials in Gradle or Android Studio and run:
+For a release APK, configure signing credentials in Gradle or Android Studio, then run:
 
 ```bash
 gradle assembleRelease
@@ -88,3 +90,9 @@ gradle assembleRelease
 ├── script.js                              # Navigation, particles, filters, score rendering
 └── README.md                              # Project documentation
 ```
+
+## Notes for contributors
+
+- Keep `index.html`, `styles.css`, and `script.js` at the repository root as the canonical website files.
+- The Android Gradle task `syncWebAssets` copies those files into the APK asset tree during builds.
+- Do not commit generated Gradle build folders, APKs, AABs, or `local.properties`.
