@@ -1,0 +1,37 @@
+plugins {
+    id 'com.android.application'
+}
+
+// Keep the website source of truth at the repository root while packaging
+// fresh copies into the APK under file:///android_asset/site/.
+def webAssetOutput = layout.buildDirectory.dir('generated/assets')
+
+android {
+    namespace 'com.aiassistant.universe'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'com.aiassistant.universe'
+        minSdk 23
+        targetSdk 36
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    sourceSets {
+        main {
+            assets.srcDir(webAssetOutput)
+        }
+    }
+}
+
+tasks.register('syncWebAssets', Copy) {
+    from(rootProject.layout.projectDirectory) {
+        include 'index.html', 'styles.css', 'script.js'
+    }
+    into(webAssetOutput.map { it.dir('site') })
+}
+
+tasks.named('preBuild') {
+    dependsOn tasks.named('syncWebAssets')
+}
